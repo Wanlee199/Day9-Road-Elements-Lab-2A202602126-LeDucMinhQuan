@@ -1,1 +1,148 @@
-[]
+[
+  {
+    "name": "prohibitory",
+    "color": "#E53935",
+    "type": "polygon",
+    "attributes": [
+      {
+        "name": "occluded",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "truncated",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "blurred",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "name": "mandatory",
+    "color": "#1E88E5",
+    "type": "polygon",
+    "attributes": [
+      {
+        "name": "occluded",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "truncated",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "blurred",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "name": "danger",
+    "color": "#FB8C00",
+    "type": "polygon",
+    "attributes": [
+      {
+        "name": "occluded",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "truncated",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "blurred",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "name": "supplementary",
+    "color": "#8E24AA",
+    "type": "polygon",
+    "attributes": [
+      {
+        "name": "occluded",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "truncated",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "blurred",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "name": "other",
+    "color": "#757575",
+    "type": "polygon",
+    "attributes": [
+      {
+        "name": "occluded",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "truncated",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      },
+      {
+        "name": "blurred",
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": ["false"],
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "name": "image_escalate",
+    "color": "#D81B60",
+    "type": "tag",
+    "attributes": []
+  }
+]

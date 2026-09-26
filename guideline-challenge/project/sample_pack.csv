@@ -1,1 +1,19 @@
 sample_id,split,tags,reason
+GTS01,example,normal,Ví dụ biển Cấm chuẩn rõ ràng
+GTS02,example,edge,Ví dụ biển Nguy hiểm bị cắt ở mép ảnh
+GTS05,example,edge;occlusion,Ví dụ biển Chỉ dẫn bị che khuất bởi tán cây
+GTS08,example,normal;critical,Ví dụ chùm biển báo gồm 1 biển Cấm và 1 biển Phụ
+GTS12,example,small_far;ambiguity,Ví dụ biển báo mờ xa vỡ hạt gán class other
+GTS18,example,edge;ambiguity,Ví dụ biển báo quay mặt lưng màu xám gán class other
+GTS03,calibration,normal,Kiểm tra khả năng phân loại biển Cấm của annotator
+GTS04,calibration,normal,Kiểm tra phân loại biển Nguy hiểm
+GTS06,calibration,occlusion;edge,Kiểm tra vẽ polygon khi biển bị che 20%
+GTS07,calibration,small_far,Kiểm tra bật attribute blurred cho biển xa
+GTS09,calibration,critical;edge,Kiểm tra gán attribute truncated sát rìa ảnh
+GTS10,calibration,normal,Kiểm tra biển Chỉ dẫn mảng lớn
+GTS11,calibration,ambiguity;edge,Kiểm tra gán nhãn biển phụ kèm biển chính
+GTS13,blind,normal,Ảnh blind normal biển báo rõ ràng
+GTS14,blind,edge;occlusion,Ảnh blind biển báo bị cây che khuất
+GTS15,blind,critical;edge,Ảnh blind biển báo bị cắt ranh giới ở mép
+GTS16,blind,ambiguity;small_far,Ảnh blind biển nhỏ xa không rõ loại
+GTS17,blind,critical;ambiguity,Ảnh blind tranh chấp trường hợp lóa sáng
