@@ -10,7 +10,7 @@
 Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng ngữ nghĩa (Polygon / Brush Mask - Kiểu nhãn `any`) và phân loại 5 nhóm biển báo giao thông cùng 3 thuộc tính trạng thái cho tập dữ liệu GTSDB. Dữ liệu gán nhãn phục vụ huấn luyện mô hình nhận diện biển báo cho hệ thống trợ lái và xe tự hành (ADAS/Autonomous Driving).
 
 ### 1.2 Phạm vi (Scope)
-- **Trong phạm vi (In scope):** Tất cả các biển báo giao thông đường bộ hướng mặt trước về phía xe/camera xuất hiện trong khung ảnh, bao gồm biển báo mờ, bị che khuất một phần, bị cắt ở viền ảnh, biển phụ, biển chỉ hướng đi và biển ưu tiên.
+- **Trong phạm vi (In scope):** Tất cả các biển báo giao thông đường bộ xuất hiện trong khung ảnh, bao gồm biển báo mờ, bị che khuất một phần, bị cắt ở viền ảnh, biển phụ, biển chỉ hướng đi, biển ưu tiên và **biển báo quay mặt lưng**.
 - **Ngoài phạm vi (Out of scope):** Cột/trụ đỡ biển báo, giá treo kim loại, biển hiệu quảng cáo thương mại, biển tên cửa hàng.
 
 ---
@@ -32,7 +32,7 @@ Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng n
   - Chỉ khoanh phần **mặt biển báo thực sự nhìn thấy được** (Visible Signboard Face).
   - **KHÔNG khoanh cột/trụ đỡ** biển báo.
   - **KHÔNG khoanh phần bị che khuất** (Không dùng phương pháp Amodal segmentation, không tự ước lượng đường cong bị lá cây hay cột đèn che).
-  - **KHÔNG khoanh biển báo quay mặt lưng** (mặt sau xám/nền kim loại không nhìn thấy mặt biển). Nếu biển báo bị quay mặt lưng hoặc nghiêng > 80 độ làm mất hoàn toàn hình dạng mặt biển -> Phân loại vào class `other` + bật thuộc tính `occluded=true` / `blurred=true`.
+  - **Xử lý biển báo quay mặt lưng:** Tất cả các biển báo bị quay mặt lưng (mặt sau màu xám/nền kim loại không nhìn thấy mặt trước) hoặc bị nghiêng góc quá lớn (> 80 độ) đều **bắt buộc khoanh nhãn** $\rightarrow$ Phân loại vào Class **`other`** và bật thuộc tính **`occluded=true`** (hoặc `blurred=true` nếu mờ).
 - **Mật độ điểm nút / Cọ tô:**
   - Đặt các điểm nút ôm sát đường viền mặt biển báo.
   - Biển hình tam giác/chữ nhật/vuông/hình thoi: Đặt các điểm tại chính xác các đỉnh góc.
@@ -48,14 +48,14 @@ Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng n
 | Class Name | Tên Tiếng Việt | Dấu hiệu nhận biết & Hình dạng |
 |---|---|---|
 | `prohibitory` | Biển Cấm | Hình tròn viền đỏ nền trắng/vàng (hoặc hình tròn nền đỏ chữ trắng như biển STOP, cấm đi ngược chiều). |
-| `mandatory` | Biển Chỉ dẫn / Hiệu lệnh / Ưu tiên | Hình tròn, hình vuông hoặc hình chữ nhật màu xanh lam (Blue) chỉ hướng đi/làn đường. **ĐẶC BIỆT:** Bao gồm biển hình thoi màu vàng viền trắng (Biển đường ưu tiên - Priority Road) và biển chỉ hướng di chuyển tới Địa danh/Quận. |
+| `mandatory` | Biển Chỉ dẫn / Hiệu lệnh / Ưu tiên | Hình tròn, hình vuông hoặc hình chữ nhật màu xanh lam (Blue) chỉ hướng đi/làn đường. **ĐẶC BIỆT:** Bao gồm biển hình thoi màu vàng viền trắng (Biển đường ưu tiên - Priority Road) và biển chỉ hướng di chuyển tới Địa danh/Quận/Biển tên đường có hình mũi tên. |
 | `danger` | Biển Nguy hiểm / Cảnh báo | Hình tam giác đều, đỉnh hướng lên trên, viền đỏ, nền vàng hoặc trắng chứa biểu tượng cảnh báo nguy hiểm phía trước. |
 | `supplementary` | Biển Phụ | Hình chữ nhật nhỏ nền trắng viền đen, đặt ngay bên dưới biển chính để thuyết minh khoảng cách, thời gian, loại xe. |
-| `other` | Khác / Không xác định | Biển không thuộc 4 loại trên: biển mờ xa không đọc được loại, biển bị che khuất > 80%, biển quay mặt lưng, biển tên đường/tên phố không chỉ hướng giao thông. |
+| `other` | Khác / Không xác định | Biển không thuộc 4 loại trên: **biển báo quay mặt lưng màu xám**, biển mờ xa không đọc được loại, biển bị che khuất > 80%, biển tên đường/tên phố hình chữ nhật phẳng không có mũi tên chỉ hướng. |
 
 ---
 
-## 5. Quy tắc xử lý các trường hợp đặc biệt (Edge Cases mới bổ sung v2)
+## 5. Quy tắc xử lý các trường hợp đặc biệt (Edge Cases bổ sung v2)
 
 ### Edge Case 1: Biển chỉ hướng đi / Biển tên đường dạng mũi tên (Directional & Arrow Street Signs)
 - **Mô tả:** Biển báo chỉ hướng di chuyển (ví dụ: *Đi thẳng tới Quận A, rẽ phải tới Quận B*) hoặc **biển tên đường có hình dạng vót nhọn mũi tên ở một đầu** (Arrow-shaped street sign, phổ biến ở Đức/Châu Âu như biển *Zeichen 415/437* chỉ hướng rẽ vào phố).
@@ -77,10 +77,10 @@ Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng n
 ### Bắt buộc gán nhãn (Inclusion):
 1. Tất cả biển báo giao thông rõ ràng thuộc 4 nhóm `prohibitory`, `mandatory`, `danger`, `supplementary`.
 2. Biển đường ưu tiên hình thoi màu vàng (gán `mandatory`).
-3. Biển chỉ hướng đi tới các Quận/Địa danh (gán `mandatory`).
+3. Biển chỉ hướng đi tới các Quận/Địa danh và biển tên đường dạng mũi tên (gán `mandatory`).
 4. Biển báo bị che một phần hoặc bị cắt rìa ảnh (gán class tương ứng + bật attribute `occluded=true` / `truncated=true`).
 5. Biển báo bị mờ nhưng vẫn phân biệt được loại (gán class tương ứng + bật `blurred=true`).
-6. Biển báo quay mặt lưng, biển tên phố, biển quá nhỏ/mờ không nhận diện được loại (gán class `other`).
+6. **Biển báo quay mặt lưng màu xám**, biển tên phố hình chữ nhật phẳng, biển quá nhỏ/mờ không nhận diện được loại (gán class **`other`** + bật `occluded=true`).
 
 ### Bỏ qua - Không gán nhãn (Exclusion / Ignore):
 1. Cột đỡ, chân đế, xà ngang treo biển báo.
@@ -91,8 +91,9 @@ Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng n
 
 ## 7. Ambiguity / Escalation
 
-1. **Tranh chấp giữa Class `mandatory` và Class `other` đối với Biển Chỉ Đường:**
-   - Nếu biển chỉ ghi tên địa danh/quận mà không chắc chắn có phải chỉ hướng giao thông hay không $\rightarrow$ Ưu tiên xem xét có mũi tên chỉ hướng không. Nếu có mũi tên chỉ hướng rẽ/thẳng $\rightarrow$ `mandatory`. Nếu chỉ là bảng tên thuần túy $\rightarrow$ `other`.
+1. **Tranh chấp giữa Class `mandatory` và Class `other` đối với Biển tên đường / Biển chỉ đường:**
+   - Nếu biển có biểu tượng mũi tên hoặc tấm biển được thiết kế dạng mũi tên vót nhọn $\rightarrow$ Bắt buộc phân loại vào `mandatory`.
+   - Nếu chỉ là bảng tên đường hình chữ nhật phẳng thuần túy không có mũi tên $\rightarrow$ Phân loại vào `other`.
 2. **Quy trình Leo thang (Escalation Path trên CVAT):**
    - Annotator bấm chọn công cụ **Setup tag** -> Chọn tag `image_escalate` cho toàn bộ bức ảnh khi gặp trường hợp tranh chấp không chốt được.
 
@@ -116,7 +117,7 @@ Task này thực hiện trên dữ liệu ảnh tĩnh (Single frames GTSDB).
 | GTS09 | Biển hình thoi màu vàng viền trắng (Đường ưu tiên) | Class: `mandatory`<br>Attributes: `occluded=false`, `truncated=false`, `blurred=false` | Mục 5 - Edge Case 2 (Biển hình thoi) |
 | GTS11 | Biển màu xanh chỉ hướng di chuyển thẳng đi Quận A, rẽ phải đi Quận B | Class: `mandatory`<br>Attributes: `occluded=false`, `truncated=false`, `blurred=false` | Mục 5 - Edge Case 1 (Biển chỉ đường) |
 | GTS12 | Biển báo ở xa mờ vỡ pixel không đọc được nội dung | Class: `other`<br>Attributes: `occluded=false`, `truncated=false`, `blurred=true` | Mục 4 & 6 - Blurred & Other |
-| GTS18 | Biển báo quay mặt lưng màu xám về phía camera | Class: `other`<br>Attributes: `occluded=true`, `truncated=false`, `blurred=false` | Mục 3 & 5 - Rear facing |
+| GTS18 | Biển báo quay mặt lưng màu xám về phía camera | Class: `other`<br>Attributes: `occluded=true`, `truncated=false`, `blurred=false` | Mục 3 & 6 - Rear facing |
 
 ---
 
