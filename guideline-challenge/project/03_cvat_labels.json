@@ -2,7 +2,7 @@
   {
     "name": "prohibitory",
     "color": "#E53935",
-    "type": "polygon",
+    "type": "any",
     "attributes": [
       {
         "name": "occluded",
@@ -30,7 +30,7 @@
   {
     "name": "mandatory",
     "color": "#1E88E5",
-    "type": "polygon",
+    "type": "any",
     "attributes": [
       {
         "name": "occluded",
@@ -58,7 +58,7 @@
   {
     "name": "danger",
     "color": "#FB8C00",
-    "type": "polygon",
+    "type": "any",
     "attributes": [
       {
         "name": "occluded",
@@ -86,7 +86,7 @@
   {
     "name": "supplementary",
     "color": "#8E24AA",
-    "type": "polygon",
+    "type": "any",
     "attributes": [
       {
         "name": "occluded",
@@ -114,7 +114,7 @@
   {
     "name": "other",
     "color": "#757575",
-    "type": "polygon",
+    "type": "any",
     "attributes": [
       {
         "name": "occluded",
