@@ -1,1 +1,4 @@
 sample_id,item,values_by_annotator,diagnosis,action,rule_change
+GTS09,class,an=danger; binh=mandatory,guideline_gap,revise_rule,Quy định biển hình thoi màu vàng (Đường ưu tiên) thuộc class mandatory không thuộc danger
+GTS11,class,an=other; binh=mandatory,guideline_gap,revise_rule,Quy định biển màu xanh lam chỉ hướng đi tới Quận A/Quận B thuộc class mandatory
+GTS06,occluded,an=false; binh=true,guideline_gap,add_example,Thêm ví dụ quy định bật occluded=true khi biển bị tán cây che khuất trên 10%
