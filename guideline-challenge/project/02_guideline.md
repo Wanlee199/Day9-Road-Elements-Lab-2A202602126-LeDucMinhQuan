@@ -57,11 +57,11 @@ Tài liệu này hướng dẫn chi tiết quy trình đánh nhãn phân vùng n
 
 ## 5. Quy tắc xử lý các trường hợp đặc biệt (Edge Cases mới bổ sung v2)
 
-### Edge Case 1: Biển chỉ hướng đi / chỉ đường (Directional Sign / Route Guidance)
-- **Mô tả:** Biển báo ghi thông tin chỉ hướng di chuyển (ví dụ: *Đi thẳng tới Quận A, rẽ phải tới Quận B*).
-- **Quy tắc phân loại:**
-  1. Nếu biển báo màu xanh lam (Blue) chứa mũi tên chỉ hướng rẽ/làn đường cho giao thông $\rightarrow$ Phân loại vào **`mandatory`** (Biển chỉ dẫn).
-  2. Nếu chỉ là biển tên đường/tên phố thông thường (Street Name Sign) màu trắng/xanh lá không chứa thông tin điều tiết hướng đi giao thông $\rightarrow$ Phân loại vào **`other`**.
+### Edge Case 1: Biển chỉ hướng đi / Biển tên đường dạng mũi tên (Directional & Arrow Street Signs)
+- **Mô tả:** Biển báo chỉ hướng di chuyển (ví dụ: *Đi thẳng tới Quận A, rẽ phải tới Quận B*) hoặc **biển tên đường có hình dạng vót nhọn mũi tên ở một đầu** (Arrow-shaped street sign, phổ biến ở Đức/Châu Âu như biển *Zeichen 415/437* chỉ hướng rẽ vào phố).
+- **Quy tắc phân loại cụ thể:**
+  1. **Tất cả các biển CÓ HÌNH MŨI TÊN hoặc BẢN THÂN TẤM BIỂN DẠNG MŨI TÊN VÓT NHỌN** $\rightarrow$ Bắt buộc phân loại vào **`mandatory`** (Biển chỉ dẫn/hướng di chuyển). Vì nó mang chức năng chỉ dẫn phương tiện rẽ theo hướng đó.
+  2. **Chỉ các biển tên đường hình chữ nhật phẳng thuần túy** (không có mũi tên, chỉ gắn cố định báo tên vị trí) $\rightarrow$ Mới phân loại vào **`other`**.
 
 ### Edge Case 2: Biển báo hình thoi - Biển Đường Ưu Tiên (Priority Road Sign - German Sign 306)
 - **Mô tả:** Biển hình thoi (Diamond shape) có viền ngoài màu trắng, hình thoi bên trong màu vàng.
